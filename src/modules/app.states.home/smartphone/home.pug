@@ -1,5 +1,28 @@
-ion-view.view-home(
-  view-title="{{ 'STATES.HOME.TITLE' | translate }}",
-  translate-namespace="STATES.HOME")
+ion-view(view-title="Accueil")
+  ion-header-bar.bar-subheader.item-input-inset
+    label.item-input-wrapper
+      i.icon.ion-ios-search.placeholder-icon
+      input(
+        placeholder="Recherche",
+        ng-model="search.query",
+        type="search")
+        //-on fait en sorte d'activer le bouton que a certains moments
+    button.button.button-clear.button-royal(
+      ng-disabled="search.query.length < 3",
+      on-tap="homeController.search()")
+      | OK
+      //-il affiche la liste
   ion-content
-    ng-include(src="'modules/app.states.home/smartphone/content.home.html'")
+    ion list
+      ion-item.item-diviser Resultats
+      //-il est affiché que si on a pas de resultat dans le tableau resultat si il est vide alors ceci s'affiche et sinon il ne s'affiche pas
+      ion-item(ng-if="search.results.length < 1") Aucun résultat
+      //-ici on dit qu'ilaffiche les resultats dans le tableau resultat
+      ion-item.item-icon-right(
+        ng-repeat="result in search.results",
+        ui-state-params="{ movieId: result.id}",
+        ui-state="STATE_DETAILS")
+        | {{ result.title }}
+        //-Item 1
+        i.icon.ion-ios-arrow-forward
+

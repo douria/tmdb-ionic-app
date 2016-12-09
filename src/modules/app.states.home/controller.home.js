@@ -3,28 +3,25 @@
  */
 (function (module) {
   'use strict';
-
-  function HomeController($scope, popupService, statesData) {
+//-un controller c'est juste du code bete!!!!
+//-un service c'est le code qui est appele par les controlleurs (il est en commun)
+  function HomeController($scope, statesService) {
     var controller = this;
 
-    $scope.statesData = statesData;
+    $scope.search = { query: '', result: [] };
 
-    $scope.from = 'homeController';
-
-    controller.showPopup = function () {
-      var scope = { from: $scope.from, title: 'Popup' };
-      popupService.open(module, 'smartphone/popup', scope);
+    controller.search = function () {
+      //-recupere le vrai resultat de la recherche
+      $scope.search.results = statesService.search.query.then(function (results) {
+        $scope.search.results = results;
+      });
     };
 
-    controller.onLanguageChange = function (locale) {
-      console.debug(locale);
-    };
   }
-
+  //- angular retourne automatiquement une promesse ex: rejected , success ...etc une sorte de feedback sur ce qui s'est produit
   module.controller('homeController', [
     '$scope',
-    'popupService',
-    'statesData',
+    'statesService',
     HomeController
   ]);
 
