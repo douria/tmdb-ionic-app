@@ -15,7 +15,8 @@
         [{ title: query, id: 1 }, { title: query, id: 2 }]
       );
     };
-    /**
+
+     /**
      * Resolve states data.
      * @return {Promise} Passing an object.
      */

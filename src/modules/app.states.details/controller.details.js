@@ -4,11 +4,11 @@
 (function (module) {
   'use strict';
 
-  function detailsController($scope) {
+  function DetailsController($scope, movieDetails) {
     var controller = this;
 
-    $scope.movieDetails=movieDetails;
-    };
+    $scope.movieDetails = movieDetails;
+
   }
 
   module.controller('detailsController', [
